@@ -6,6 +6,8 @@ redis-node provides simple rest-api based on express server with a redis databas
 + bluebird promises
 + redis client connector with preconfiguration for redis-lab cloud database
 + poor error handling ;-)
++ store String key value paris to redis cloud
++ store complex hash object pairs to redis cloud
 
 # Prerequisites \
 nodeJS 6.x.x LTS installed \
