@@ -1,7 +1,8 @@
-#Prerequisites
+##Prerequisites
 nodeJS 6.x.x LTS installed
 npm 5.x.x
-#Setup
+
+##Setup
 install dependencies
 ``npm install`` 
 
