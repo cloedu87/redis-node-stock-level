@@ -3,11 +3,11 @@ redis-node provides simple rest-api based on express server with a redis databas
 
 ## features are...
 + powerful express server with rest-api
-+ bluebird promises
 + redis client connector with preconfiguration for redis-lab cloud database
 + poor error handling ;-)
 + store String key value paris to redis cloud
 + store complex hash object pairs to redis cloud
++ promise handling with bluebird
 
 # Prerequisites \
 nodeJS 6.x.x LTS installed \
@@ -26,12 +26,12 @@ checkout in browser/restclient \
 ``http://localhost:3000``
 
 # helpful links \
-## bluebird promises \
-http://bluebirdjs.com/docs/getting-started.html \
-
 ## node and express \
 https://github.com/NodeRedis/node_redis \
 https://www.npmjs.com/package/express \
+https://devhints.io/bluebird \
+http://bluebirdjs.com/docs/getting-started.html \
+http://bluebirdjs.com/docs/api/promisification.html \
 
 ## redis \
 https://redis.io/ \
