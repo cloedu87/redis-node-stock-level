@@ -64,7 +64,7 @@ router.get('/string/entry/:id', function (req, res, next) {
 router.delete('/delete', function (req, res, next) {
 
     redisService.flushDatabase(function (err, succeeded) {
-        if(err || !succeeded) {
+        if(err | !succeeded) {
             console.error(err);
             res.sendStatus(400);
         }
