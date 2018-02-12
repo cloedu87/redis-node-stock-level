@@ -18,6 +18,23 @@ let service = {
         });
         return client;
     },
+    incrementBy: function (key, increment, callback) {
+        let client = service.getRedisClient();
+        let incrementInt = parseInt(increment);
+
+        client.incrby(key, incrementInt, function (err, reply) {
+            client.quit();
+            callback(err, reply);
+        });
+    },
+    createHashEntry: function (key, value, callback) {
+        let client = service.getRedisClient();
+
+        client.set(key, value, function (err) {
+            client.quit();
+            callback(err);
+        });
+    },
     getStringEntry: function (key, callback) {
         let client = service.getRedisClient();
 
@@ -34,14 +51,14 @@ let service = {
             callback(err);
         });
     },
-    getHashEntry: function (key, callback) {
+    getHashMapEntry: function (key, callback) {
         let client = service.getRedisClient();
         client.hgetall(key, function (err, reply) {
             client.quit();
             callback(err, reply);
         });
     },
-    createHashEntry: function (key, value, callback) {
+    createHashMapEntry: function (key, value, callback) {
         let client = service.getRedisClient();
         client.hmset(key, value, function (err) {
             client.quit();
