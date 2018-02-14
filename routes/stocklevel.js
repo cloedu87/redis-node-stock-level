@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const redisService = require("../services/redis-service");
+const stocklevelService = require("../services/stocklevel-service");
 
 router.post('/hash/entry', function (req, res, next) {
     let key = req.body.key;
     let value = req.body.value;
 
-    redisService.createHashEntry(key, value, function (err) {
+    stocklevelService.createHashEntry(key, value, function (err) {
         if (err) {
             console.error(err);
             res.sendStatus(400)
@@ -17,11 +17,11 @@ router.post('/hash/entry', function (req, res, next) {
 });
 
 /* incrBy redis api. hash int*/
-router.put('/increment/:id', function (req, res, next) {
-    let key = req.params.id;
+router.put('/increment/:warehouse/:product', function (req, res, next) {
+    let key = req.params.warehouse + "|" + req.params.product;
     let value = req.body.value;
 
-    redisService.incrementBy(key, value, function (err, reply) {
+    stocklevelService.incrementBy(key, value, function (err, reply) {
         if (err) {
             console.error(err);
             res.sendStatus(400);
@@ -42,7 +42,7 @@ router.post('/hashmap/entry', function (req, res, next) {
     let key = req.body.key;
     let value = req.body.value;
 
-    redisService.createHashMapEntry(key, value, function (err) {
+    stocklevelService.createHashMapEntry(key, value, function (err) {
         if (err) {
             console.error(err);
             res.sendStatus(400)
@@ -56,7 +56,7 @@ router.post('/hashmap/entry', function (req, res, next) {
 router.get('/hashmap/entry/:id', function (req, res, next) {
     let key = req.params.id;
 
-    redisService.getHashMapEntry(key, function (err, reply) {
+    stocklevelService.getHashMapEntry(key, function (err, reply) {
         if (err) {
             console.error(err);
             res.sendStatus(400);
@@ -71,7 +71,7 @@ router.post('/string/entry', function (req, res, next) {
     let key = req.body.key;
     let value = req.body.value;
 
-    redisService.createStringEntry(key, value, function (err, reply) {
+    stocklevelService.createStringEntry(key, value, function (err, reply) {
         if (err) {
             console.error(err);
             res.sendStatus(400);
@@ -83,9 +83,9 @@ router.post('/string/entry', function (req, res, next) {
 
 /* get redis api. string key-value */
 router.get('/string/entry/:warehouse/:product', function (req, res, next) {
-    let key = req.params.warehouse + req.params.product;
+    let key = req.params.warehouse + "|" + req.params.product;
 
-    redisService.getStringEntry(key, function (err, reply) {
+    stocklevelService.getStringEntry(key, function (err, reply) {
         if (err) {
             console.error(err);
             res.sendStatus(400);
@@ -98,7 +98,7 @@ router.get('/string/entry/:warehouse/:product', function (req, res, next) {
 /* delete redis api. flush all data in redis db */
 router.delete('/delete', function (req, res, next) {
 
-    redisService.flushDatabase(function (err, succeeded) {
+    stocklevelService.flushDatabase(function (err, succeeded) {
         if (err) {
             console.error("error occured during flushing redis database");
             console.dir(err);
