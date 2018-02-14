@@ -82,8 +82,8 @@ router.post('/string/entry', function (req, res, next) {
 });
 
 /* get redis api. string key-value */
-router.get('/string/entry/:id', function (req, res, next) {
-    let key = req.params.id;
+router.get('/string/entry/:warehouse/:product', function (req, res, next) {
+    let key = req.params.warehouse + req.params.product;
 
     redisService.getStringEntry(key, function (err, reply) {
         if (err) {
